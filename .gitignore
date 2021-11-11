@@ -75,6 +75,7 @@ fabric.properties
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
+[Uu]serSettings/
 Assets/AssetStoreTools*
 Assets/StreamingAssets/AssetBundles
 Assets/StreamingAssets/AssetBundles.meta
