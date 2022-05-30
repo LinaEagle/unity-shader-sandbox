@@ -1,18 +1,21 @@
-﻿Shader "Custom/Unlit Healthbar Interpolated"
+﻿Shader "Custom/Unlit Healthbar Textured"
 {
     Properties
     {
+        [NoScaleOffset] _MainTex ("Texture", 2D) = "white" {}
         _NormValue ("Normalized Value", Range (0,1)) = 0.5
-        
-        _EmptyColor("Empty Color", Color) = (1,0,0,1)
         _EmptyThreshold ("Empty Threshold", Range (0,1)) = 0.2
-        
-        _FullColor("Full Color", Color) = (0,1,0,1)
         _FullThreshold ("Full Threshold", Range (0,1)) = 0.8
+        _PulseSpeed ("Pulse Speed", Float) = 10
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { 
+            "RenderType"="Transparent" 
+            "Queue"="Transparent"
+            }
+        
+        Blend SrcAlpha OneMinusSrcAlpha
 
         Pass
         {
@@ -42,27 +45,34 @@
                 return o;
             }
 
+            sampler2D _MainTex;
             float _NormValue;
             float _EmptyThreshold;
             float _FullThreshold;
-            half4 _EmptyColor;
-            half4 _FullColor;
+            float _PulseSpeed;
 
             fixed4 frag (v2f i) : SV_Target
             {
+                fixed4 clear = fixed4(0,0,0,0);
+                fixed4 color = tex2D(_MainTex, float2(_NormValue, i.uv.y));
+                
                 if (_NormValue == 0)
                 {
-                    return _EmptyColor;
+                    return tex2D(_MainTex, float2(0.1, i.uv.y));
+                }
+
+                if (_NormValue < _EmptyThreshold)
+                {
+                    // pulse on low
+                    fixed pulse = sin(i.uv.x - _Time.y * _PulseSpeed);
+                    color.a = pulse;
                 }
                 
-                float colorT = _NormValue + (-0.2)*(_NormValue < _EmptyThreshold) + (0.2)*(_NormValue > _FullThreshold);
-                fixed4 col = lerp(_EmptyColor, _FullColor, colorT);
+                // cull bar
+                float t = step(_NormValue, i.uv.x);
+                color = lerp(color, clear, t);
                 
-                fixed4 t = step(_NormValue, i.uv.x);
-                fixed4 black = fixed4(0,0,0,1);
-                col = lerp(col, black, t);
-                
-                return col;
+                return color;
             }
             ENDCG
         }
