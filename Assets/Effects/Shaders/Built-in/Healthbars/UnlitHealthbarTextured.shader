@@ -53,8 +53,8 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 clear = fixed4(0,0,0,0);
-                fixed4 color = tex2D(_MainTex, float2(_NormValue, i.uv.y));
+                float4 clear = fixed4(0,0,0,0);
+                float4 color = tex2D(_MainTex, float2(_NormValue, i.uv.y));
                 
                 if (_NormValue == 0)
                 {
@@ -64,7 +64,7 @@
                 if (_NormValue < _EmptyThreshold)
                 {
                     // pulse on low
-                    fixed pulse = sin(i.uv.x - _Time.y * _PulseSpeed);
+                    float pulse = sin(i.uv.x - _Time.y * _PulseSpeed);
                     color.a = pulse;
                 }
                 
