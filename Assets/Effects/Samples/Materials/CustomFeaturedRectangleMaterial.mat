@@ -101,7 +101,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Height: 0.5
+    - _Height: 0.449
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _OutlineThickness: 0.131
@@ -117,8 +117,8 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _TopLeftRadius: 0.3
-    - _TopRightRadius: 0.3
-    - _Width: 0.563
+    - _TopRightRadius: 0.2696
+    - _Width: 0.659
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:

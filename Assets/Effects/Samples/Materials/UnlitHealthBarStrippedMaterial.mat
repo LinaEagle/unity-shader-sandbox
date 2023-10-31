@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HealthbarInterpolated
-  m_Shader: {fileID: 4800000, guid: 8d2cfc87ae63490cbda22288edc0d9d2, type: 3}
+  m_Name: UnlitHealthBarStrippedMaterial
+  m_Shader: {fileID: 4800000, guid: fe67801e1b1733e42bdb6104e9f8d41f, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -88,15 +88,11 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EmptyThreshold: 0.2
     - _EnvironmentReflections: 1
-    - _FullThreshold: 0.8
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _NormValue: 0.772
-    - _NormalizedValue: 0.132
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
@@ -105,20 +101,19 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _StripNumber: 20
+    - _StripWidth: 0.51
     - _Surface: 0
+    - _Value: 0.67
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _EmptyColor: {r: 1, g: 0, b: 0, a: 1}
-    - _FirstColor: {r: 1, g: 1, b: 1, a: 1}
-    - _FullColor: {r: 0, g: 1, b: 0, a: 1}
-    - _SecondColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &2822920132230547066
+--- !u!114 &8952027272104065014
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

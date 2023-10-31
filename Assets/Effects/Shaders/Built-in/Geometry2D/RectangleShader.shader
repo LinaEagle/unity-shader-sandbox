@@ -1,18 +1,14 @@
-Shader "Custom/Circle"
+Shader "Unlit/RectangleShader"
 {
     Properties
     {
-        _Radius ("Normalized Radius", Range(0,1)) = 0.5
-        
+        _RectangleWidth ("Width", Range (0,1)) = 0.5
+        _MainTex ("Texture", 2D) = "white" {}
     }
     SubShader
     {
-        Tags { 
-            "RenderType"="Transparent"
-            "Queue"="Transparent"}
-        
-        Blend SrcAlpha OneMinusSrcAlpha
-        Cull off
+        Tags { "RenderType"="Opaque" }
+        LOD 100
 
         Pass
         {
@@ -34,24 +30,28 @@ Shader "Custom/Circle"
                 float4 vertex : SV_POSITION;
             };
 
+            sampler2D _MainTex;
+            float4 _MainTex_ST;
+
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 return o;
             }
 
-            float _Radius;
+            float _RectangleWidth;
 
             fixed4 frag (v2f i) : SV_Target
             {
-                
-                float2 centeredUV = i.uv*2 -1;
-                float radialDistance = length(centeredUV);
-                float circle = step(float4(radialDistance.xxx, 1), _Radius);
-                
-                return abs(circle);
+                fixed4 tex = tex2D(_MainTex, i.uv);
+
+                float2 centeredUV = i.uv * 2 - 1;
+                float width = abs(centeredUV.x) < _RectangleWidth;
+                float height = abs(centeredUV.y) < _RectangleWidth;
+                float shape = width * height;
+                return shape;
             }
             ENDCG
         }
